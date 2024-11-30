@@ -196,8 +196,8 @@ function loadJson() {
 const testArray = 
 [
   {name: 'Mendoza', embark: '21-Jan-2024', disembark: '21-Feb-2024'}, 
-  {name: 'Obejas', embark: '03-Jan-2024', disembark: '13-Mar-2024'},
-  {name: 'Rogador', embark: '19-Jan-2024', disembark: '09-Feb-2024'}, 
+  {name: 'Rogador', embark: '03-Jan-2024', disembark: '13-Mar-2024'},
+  {name: 'Evin', embark: '19-Jan-2024', disembark: '09-Feb-2024'}, 
   {name: 'Sacayanan', embark: '21-Feb-2024', disembark: '03-Mar-2024'}
 ]
 

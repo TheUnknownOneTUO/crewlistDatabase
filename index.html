@@ -1,1 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <title>HTML</title>
+  
+  <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  
+  <label for="databaseUploadInput"></label>Upload Database<input type="file" id="databaseUploadInput" accept=".json">
+  <button id="loadFileBtn">Load File</button>
+  <br>
+  <br>
+  
+  <label for="nameInput">Name</label><input type="text" id="nameInput"></input>
+  <br>
+  <label for="embarkInput">Embarkation</label><input type="date" id="embarkInput"></input>
+  <br>
+  <label for="disembarkInput">Disembarkation</label><input type="date" id="disembarkInput">
+  <br>
+  <button id="addPersonBtn">Add Person</button>
+  <br>
+  <br>
+  <br>
+  
+  
+  <!--ACTUAL CREWLIST VISUAL-->
+  
+  <label for="crewListDateInput">Crew List Date</label><input type="date" id="crewListDateInput">
+  <br>
+  </label><button id="prevDayBtn">Compare to Previous Day</button>
+  <br>
+  <button id="prevMonthBtn">Compare to Previous Month</button>
+  <br>
+  <button id="generateListBtn">Generate List!</button>
+  <button id="resetBtn">Reset</button>
+  
+  <p id="list"></p>
+  
+  <button id="saveJsonBtn">Save Database</button>
+  <button id="printTxtBtn">Print Text</button>
+  
+  
+  <!-- Project -->
+  <script src="main.js"></script>
+</body>
+</html>

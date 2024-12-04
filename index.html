@@ -1,55 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>HTML</title>
-  
+
   <!-- HTML -->
-  
+
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <label for="databaseUploadInput"></label>Upload Database<input type="file" id="databaseUploadInput" accept=".json">
-  <button id="loadFileBtn">Load File</button>
-  <br>
-  <br>
+
+  <div id="jsonLoaderDiv">
+
+    <label for="databaseUploadInput">Upload Database</label>
+    <br>
+    <input type="file" id="databaseUploadInput" accept=".json">
+    <br>
+    <button id="loadFileBtn">Load File</button>
+
+  </div>
+
+  <div id="inputDiv">
+    
+    <h2>INPUT INFO</h2>
+
+    <label for="familyNameInput">Family Name</label>
+    <input type="text" id="familyNameInput">
+    <br>
+    
+    <label for="givenNameInput">Given Name</label>
+    <input type="text" id="givenNameInput">
+    <br>
+    
+    <label for="rankInput">Rank</label>
+    <input type="text" id="rankInput">
+    <br>
+    
+    <label for="birthdayInput">Date of Birth</label>
+    <input type="text" id="birthdayInput">
+    <br>
+    
+    <label for="birthPlaceInput">Place of Birth</label>
+    <input type="text" id="birthPlaceInput">
+    <br>
+    
+    <label for="genderInput">Gender</label>
+    <input type="text" id="genderInput">
+    <br>
+    
+    <label for="idNumInput">ID Number</label>
+    <input type="text" id="idNumInput">
+    <br>
+    
+    <label for="idExpiryInput">ID Expiration Date</label>
+    <input type="text" id="idExpiryInput">
+    <br>
+    
+    <label for="embarkationInput">Embarkation Date</label>
+    <input type="text" id="embarkationInput">
+    <br>
+    
+    <label for="disembarkationInput">Disembarkation Date</label>
+    <input type="text" id="disembarkationInput">
+    <br>
+    
+    <label for="returneeInput">Returnee</label>
+    <input type="text" id="returneeInput">
+    <br>
+    
+    <button id="inputPreviewBtn">Preview</button>
+    
+    
+
+  </div>
+
+  <div id="inputPreviewDiv" class="isHidden">
+
+    <table id="previewTable">
+      
+      <thead>
+        <tr id="previewRow">
+          <th>
+            Family Name
+          </th>
+          <th>
+            Given Name
+          </th>
+          <th>
+            Rank
+          </th>
+          <th>
+            Birthday
+          </th>
+          <th>
+            Birth Place
+          </th>
+          <th>
+            Gender
+          </th>
+          <th>
+            ID Number
+          </th>
+          <th>
+            ID Expiration Date
+          </th>
+          <th>
+            Embarkation Date
+          </th>
+          <th>
+            Disembarkation Date
+          </th>
+          <th>
+            Returnee
+          </th>
+        </tr>
+      </thead>
+      
+      <tbody id="previewTableBody">
+        
+      </tbody>
+      
+    </table>
+    
+    <button id="pushToDatabaseBtn">Push to Database</button>
+
+  </div>
   
-  <label for="nameInput">Name</label><input type="text" id="nameInput"></input>
-  <br>
-  <label for="embarkInput">Embarkation</label><input type="date" id="embarkInput"></input>
-  <br>
-  <label for="disembarkInput">Disembarkation</label><input type="date" id="disembarkInput">
-  <br>
-  <button id="addPersonBtn">Add Person</button>
-  <br>
-  <br>
-  <br>
+  <div id="duplicateReviewDiv" class="isHidden">
+    
+    <h2>REVIEW DUPLICATE ENTRIES</h2>
+    
+    <p id="noInputDupText" class="isHidden">NO DUPLICATE INPUT</p>
+    
+    <h3 id="inputDupHead">FOUND DUPLICATES IN INPUT FIELDS</h3>
+    
+    <table id="inputDupTable" class="isHidden">
+      <thead>
+        <tr id="inputDupRow">
+          <th>FAMILY NAME</th>
+          <th>GIVEN NAME</th>
+          <th>EMBARKATION</th>
+          <th>DISEMBARKATION</th>
+          <th>RETURNEE</th>
+          <th></th>
+        </tr>
+      </thead>
+      
+      <tbody id="inputDupTableBody">
+        
+      </tbody>
+    </table>
+    
+    <p id="noDatabaseDupText" class="isHidden">NO DUPLICATE IN DATABASE</p>
+    
+    <h3 id="databaseDupHead">FOUND DUPLICATES IN THE DATABASE</h3>
+    
+    <table id="databaseDupTable" class="isHidden">
+      <thead>
+        <tr id="databaseDupRow">
+          <th>FAMILY NAME</th>
+          <th>GIVEN NAME</th>
+          <th>EMBARKATION</th>
+          <th>DISEMBARKATION</th>
+          <th>RETURNEE</th>
+          <th></th>
+        </tr>
+      </thead>
+      
+      <tbody id="databaseDupTableBody">
+        
+      </tbody>
+    </table>
+    
+    <button id="closeDupReviewBtn">Close</button>
+    
+  </div>
+
+  <div id="crewlistPreviewDiv">
+
+
+
+  </div>
+
+  <div id="fullDatabaseDiv">
+    
+    <h2>CREWLIST DATABASE</h2>
+
+    <button id="fullDatabaseBtn" class="">SHOW FULL DATABASE</button>
+    
+    <table id="fullDatabaseTable" class="isHidden">
+      
+      <thead>
+        <tr id="fullDatabaseRow">
+          <th>
+            Family Name
+          </th>
+          <th>
+            Given Name
+          </th>
+          <th>
+            Rank
+          </th>
+          <th>
+            Birthday
+          </th>
+          <th>
+            Birth Place
+          </th>
+          <th>
+            Gender
+          </th>
+          <th>
+            ID Number
+          </th>
+          <th>
+            ID Expiration Date
+          </th>
+          <th>
+            Embarkation Date
+          </th>
+          <th>
+            Disembarkation Date
+          </th>
+          <th>
+            Returnee
+          </th>
+        </tr>
+      </thead>
+      
+      <tbody id="fullDatabaseTableBody">
+        
+      </tbody>
+      
+    </table>
+    
+    <button id="downloadDatabaseBtn" class="isHidden">DOWNLOAD DATABASE</button>
+    <button id="closeFullDatabaseBtn" class="isHidden">Close</button>
+
+  </div>
   
-  
-  <!--ACTUAL CREWLIST VISUAL-->
-  
-  <label for="crewListDateInput">Crew List Date</label><input type="date" id="crewListDateInput">
-  <br>
-  </label><button id="prevDayBtn">Compare to Previous Day</button>
-  <br>
-  <button id="prevMonthBtn">Compare to Previous Month</button>
-  <br>
-  <button id="generateListBtn">Generate List!</button>
-  <button id="resetBtn">Reset</button>
-  
-  <p id="list"></p>
-  
-  <button id="saveJsonBtn">Save Database</button>
-  <button id="printTxtBtn">Print Text</button>
-  
-  
+  <div id="crewlistGeneratorDiv">
+    
+    <h2>CREWLIST GENERATOR</h2>
+    <label for="crewlistDatePickerInput">Choose Date</label>
+    <input type="date" id="crewlistDatePickerInput">
+    <button id="crewlistGeneratorBtn">Generate Crewlist</button>
+    
+    <table id="generatedCrewlistTable" class="isHidden">
+      
+      <thead>
+        <tr id="generatedCrewlistRow">
+          <th>
+            No.
+          </th>
+          <th>
+            Family Name
+          </th>
+          <th>
+            Given Name
+          </th>
+          <th>
+            Rank or Rating
+          </th>
+          <th>
+            Nationality
+          </th>
+          <th>
+            Date of Birth
+          </th>
+          <th>
+            Place of Birth
+          </th>
+          <th>
+            Gender
+          </th>
+          <th>
+            Nature of Identity Document
+          </th>
+          <th>
+            Number of Identity Document
+          </th>
+          <th>
+            Issuing State of Identity Document
+          </th>
+          <th>
+            Expiry Date of Identity Document
+          </th>
+          <th>
+            Embarkation Date
+          </th>
+          <th>
+            Disembarkation Date
+          </th>
+          <th>
+            Returnee
+          </th>
+        </tr>
+      </thead>
+      
+      <tbody id="generatedCrewlistTableBody">
+        
+      </tbody>
+      
+    </table>
+    
+    <button id="saveTxtBtn">Save as Text File</button>
+    
+  </div>
+
+
   <!-- Project -->
   <script src="main.js"></script>
 </body>
+
 </html>

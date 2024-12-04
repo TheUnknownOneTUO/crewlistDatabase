@@ -1067,7 +1067,7 @@ function saveTxt() {
 
   crewlistToBeGeneratedArray.forEach((obj, i) => {
 
-    text += `${i + 1}\t${obj.familyName}\t${obj.givenName}\t${obj.rank}\tFILIPINO\t${obj.birthday}\t${obj.birthPlace}\t${obj.gender}\tSIRB/SRB\t${obj.idNum}\tPHILIPPINES\t${obj.idExpiry}\n`
+    text += `${i + 1}\t${obj.familyName}\t${obj.givenName}\t${obj.rank}\tFILIPINO\t${obj.birthday}\t \t${obj.birthPlace}\t${obj.gender}\t \tSIRB/SRB\t \t${obj.idNum}\tPHILIPPINES\t${obj.idExpiry}\n`
 
   })
 

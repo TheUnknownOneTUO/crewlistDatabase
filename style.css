@@ -1,3 +1,59 @@
 body {
     font-size: 15pt;
 }
+
+.isHidden {
+  
+  display: none;
+  
+}
+
+#jsonLoaderDiv {
+  
+  padding: 10px;
+  background: lightblue;
+  
+}
+
+#inputDiv {
+  
+  padding: 10px;
+  
+}
+
+#inputPreviewDiv, #duplicateReviewDiv, #fullDatabaseDiv, #crewlistGeneratorDiv {
+  
+  height: 70%;
+  width: 90%;
+  overflow-x: auto;
+  overflow-y: auto;
+  
+}
+
+#previewTable, #inputDupTable, #databaseDupTable, #fullDatabaseTable, #generatedCrewlistTable {
+  
+  table-layout: fixed;
+  
+}
+
+#previewRow th, #inputDupRow th, #databaseDupRow th, #fullDatabaseRow th, #generatedCrewlistRow th {
+  
+  background: lightgray;
+  border: 2px solid black;
+  
+}
+
+#fullDatabaseDiv {
+  
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  
+}
+
+#fullDatabaseBtn {
+  
+  height: 70px;
+  width: 200px;
+  
+}

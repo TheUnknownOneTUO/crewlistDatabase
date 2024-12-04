@@ -1,209 +1,1062 @@
+function show(id) {
 
-const addPersonBtn = document.getElementById('addPersonBtn')
+  const element = document.getElementById(id)
+  element.classList.remove('isHidden')
 
-addPersonBtn.addEventListener('click', function() {
-  
-  addToDatabase()
-  
-})
-
-//array of all the people and their data
-
-let crewlistDatabase = []
-
-//function to add people to the database
-
-function addToDatabase() {
-  
-  const name = document.getElementById('nameInput')
-  const embark = document.getElementById('embarkInput')
-  const disembark = document.getElementById('disembarkInput')
-  
-  const nameAcquired = name.value
-  const embarkAcquired = embark.value
-  const disembarkAcquired = disembark.value
-  
-  const embarkDate = new Date(embarkAcquired)
-  const disembarkDate = new Date(disembarkAcquired)
-  
-  let inDatabase = false
-  
-  //to check if inputs are invalid
-  
-  if (nameAcquired === '' || embarkAcquired === '' || disembarkAcquired === '') {
-    
-    console.log('insufficient data!')
-    return
-    
-  }
-  
-  if (disembarkDate < embarkDate) {
-    
-    console.log('invalid dates!')
-    return
-    
-  }
-  
-  //logic to add in database
-  
-  crewlistDatabase.forEach((obj, i) => {
-    
-    if (obj.name === nameAcquired) {
-      
-      inDatabase = true
-      
-    }
-    
-  })
-  
-  if (!inDatabase) {
-    
-    crewlistDatabase.push({name: nameAcquired, embark: embarkAcquired, disembark: disembarkAcquired, chronEmbark: embarkDate, chronDisembark: disembarkDate})
-    
-    console.log(crewlistDatabase)
-    
-  } else{
-    
-    console.log('Already in the database!')
-    
-  }
-  
-  //to reset the input fields
-  
-  name.value = ''
-  embark.value = ''
-  disembark.value = ''
-  
 }
 
-//FOR GENERATING LIST
+function hide(id) {
 
-const crewListDateQuery = document.getElementById('crewListDateInput')
+  const element = document.getElementById(id)
+  element.classList.add('isHidden')
 
-const generateListBtn = document.getElementById('generateListBtn')
+}
 
-const resetBtn = document.getElementById('resetBtn')
+////////////////////////////////////////
+//
+//[SECTION] FOR INPUT PROCESSING
+//
+////////////////////////////////////////
 
-const list = document.getElementById('list')
+//constant variables declaration 
+const familyNameInput = document.getElementById('familyNameInput')
+const givenNameInput = document.getElementById('givenNameInput')
+const rankInput = document.getElementById('rankInput')
+const birthdayInput = document.getElementById('birthdayInput')
+const birthPlaceInput = document.getElementById('birthPlaceInput')
+const genderInput = document.getElementById('genderInput')
+const idNumInput = document.getElementById('idNumInput')
+const idExpiryInput = document.getElementById('idExpiryInput')
+const embarkationInput = document.getElementById('embarkationInput')
+const disembarkationInput = document.getElementById('disembarkationInput')
+const returneeInput = document.getElementById('returneeInput')
+
+const inputPreviewBtn = document.getElementById('inputPreviewBtn')
+
+const previewTableBody = document.getElementById('previewTableBody')
 
 //event listeners
+inputPreviewBtn.addEventListener('click', function() {
 
-generateListBtn.addEventListener('click', function() {
-  
-  generateList()
-  
+  //acquire the values of input
+  acquireInputValues()
+  console.log('values acquired')
+
+  //check if the date formatting is consistent
+  //* for embarkation dates
+  const isEmbarkationDateFormatConsistent = checkForConsistentDateFormatting(embarkationArray)
+
+  if (!isEmbarkationDateFormatConsistent) {
+
+    return
+
+  }
+
+  console.log('dates are consistent')
+
+  //* for disembarkation dates
+  const isDisembarkationDateFormatConsistent = checkForConsistentDateFormatting(disembarkationArray)
+
+  if (!isDisembarkationDateFormatConsistent) {
+
+    return
+
+  }
+
+  console.log('dates are consistent')
+
+  //convert the embarakation and disembarkation dates to appropriate format
+
+  formatDate(embarkationArray, 'embarkation')
+  formatDate(disembarkationArray, 'disembarkation')
+
+  console.log('dates are formatted')
+
+  //convert embarkation and disembarkation dates to date objects and push into their respective arrays
+
+  toUnixEpoch()
+
+  console.log('dates are converted')
+
+  //check and compare if every arrays have the same length
+  const isSameLength = checkArrayLengths()
+
+  if (!isSameLength) {
+
+    return
+
+  };
+
+  console.log('all arrays are same length')
+
+  combineAllInfo()
+
+  console.log('all info combined')
+
+  //generate the content for html table for previewing
+
+  generateInputPreviewContent()
+
+  console.log('content generated')
+
+  //Lastly, show the table
+
+  show('inputPreviewDiv')
+
 })
 
-resetBtn.addEventListener('click', function() {
-  
-  resetList()
-  
-})
+//functions
 
-function generateList() {
+let familyNameArray = []
+let givenNameArray = []
+let rankArray = []
+let birthdayArray = []
+let birthPlaceArray = []
+let genderArray = []
+let idNumArray = []
+let idExpiryArray = []
+let embarkationArray = []
+let disembarkationArray = []
+let returneeArray = []
+
+let chronEmbarkationArray = []
+let chronDisembarkationArray = []
+
+let readableEmbarkationArray = []
+let readableDisembarkationArray = []
+
+let combinedInfoArray = []
+
+//to get the values from input fields
+function acquireInputValues() {
+  ////////////////////////////////////////
+  //first: check if any of the inputs are empty
+  ////////////////////////////////////////
+
+  //TBA
+
+  ////////////////////////////////////////
+  //second: reset all arrays
+  ////////////////////////////////////////
+
+  resetBatchInputArrays()
+
+  ////////////////////////////////////////
+  //third: acquire the values from various inputs
+  ////////////////////////////////////////
+
+  const familyNameStr = familyNameInput.value
+  const givenNameStr = givenNameInput.value
+  const rankStr = rankInput.value
+  const birthdayStr = birthdayInput.value
+  const birthPlaceStr = birthPlaceInput.value
+  const genderStr = genderInput.value
+  const idNumStr = idNumInput.value
+  const idExpiryStr = idExpiryInput.value
+  const embarkationStr = embarkationInput.value
+  const disembarkationStr = disembarkationInput.value
+  const returneeStr = returneeInput.value
+
+  ////////////////////////////////////////
+  //fourth: separate the data
+  ////////////////////////////////////////
+
+  //for family name
+  separateBatchData(familyNameStr, familyNameArray)
+
+  //for given name
+  separateBatchData(givenNameStr, givenNameArray)
+
+  //for rank
+  separateBatchData(rankStr, rankArray)
+
+  //for birthday
+  separateBatchData(birthdayStr, birthdayArray)
+
+  //for birth place
+  separateBatchData(birthPlaceStr, birthPlaceArray)
+
+  //for gender
+  separateBatchData(genderStr, genderArray)
+
+  //for id number
+  separateBatchData(idNumStr, idNumArray)
+
+  //for id expiration
+  separateBatchData(idExpiryStr, idExpiryArray)
+
+  //for embarkation date
+  separateBatchData(embarkationStr, embarkationArray)
+
+  //for disembarkation date
+  separateBatchData(disembarkationStr, disembarkationArray)
+
+  //for returnee identifier
+  binaryDecoder(returneeStr, returneeArray)
+
+}
+
+//to reset all arrays of batch input
+
+function resetBatchInputArrays() {
+
+  familyNameArray = []
+  givenNameArray = []
+  rankArray = []
+  birthdayArray = []
+  birthPlaceArray = []
+  genderArray = []
+  idNumArray = []
+  idExpiryArray = []
+  embarkationArray = []
+  disembarkationArray = []
+  returneeArray = []
+
+  chronEmbarkationArray = []
+  chronDisembarkationArray = []
   
-  resetList()
-  
-  crewlistDatabase.forEach((obj, i) => {
-    
-    const crewListDate = new Date(crewListDateQuery.value)
-    
-    if (obj.chronEmbark <= crewListDate && obj.chronDisembark >= crewListDate) {
+  readableEmbarkationArray = []
+  readableDisembarkationArray = []
+
+}
+
+function separateBatchData(string, array) {
+
+  //to store the position of # symbols
+  let hashIndicesArray = []
+
+  //find # in global (full) string
+  const regex = /#/g
+
+  let match;
+
+  while ((match = regex.exec(string)) !== null) {
+
+    hashIndicesArray.push(match.index)
+
+  }
+
+  //extract the string detail based on the position of # separators
+
+  hashIndicesArray.forEach((stringIndex, i) => {
+
+    if (hashIndicesArray[i + 1] !== null) {
+
+      //+1 to exclude # symbol before every string detail
+      const startIndex = stringIndex + 1
+      //+1 to get the next index
+      const endIndex = hashIndicesArray[i + 1]
+
+      const stringDetail = string.substring(startIndex, endIndex)
+
+      array.push(stringDetail)
+
+    }
+
+  })
+
+}
+
+function binaryDecoder(string, array) {
+
+  for (let i = 0; i < string.length; i++) {
+
+    if (string[i] === '0') {
+
+      array.push(false)
+
+    } else if (string[i] === '1') {
+
+      array.push(true)
+
+    }
+
+  }
+
+}
+
+//check if the array lengths are equal to one another
+
+function checkArrayLengths() {
+
+  let identical = true
+
+  let length = null
+
+  const arrayOfArrays = [familyNameArray, givenNameArray, rankArray, birthdayArray, birthPlaceArray, genderArray, idNumArray, idExpiryArray, embarkationArray, disembarkationArray, returneeArray, chronEmbarkationArray, chronDisembarkationArray, readableEmbarkationArray, readableDisembarkationArray]
+
+  arrayOfArrays.forEach((array, i) => {
+
+    if (length === null) {
+
+      length = array.length
+
+    } else if (length !== null && array.length !== length) {
+
+      identical = false
+
+    }
+
+  })
+
+  return identical
+
+}
+
+function checkForConsistentDateFormatting(dataArray) {
+
+  let isConsistent = true
+
+
+  dataArray.forEach((date, i) => {
+
+    //check if the date provided has 11 characters
+    if (date.length !== 11) {
+
+      isConsistent = false
+
+    }
+
+    //check if any of the first three letters matches the month abrrev
+
+    let didMatched = false
+
+    const monthAbbrev = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+
+    monthAbbrev.forEach((month, i) => {
+
+      const firstThreeLetters = `${date[0]}${date[1]}${date[2]}`
+
+
+      if (firstThreeLetters === month) {
+
+        didMatched = true
+
+      }
+
+
+    });
+
+    if (!didMatched) {
+
+      isConsistent = false
+
+    }
+
+    //check if the fourth and seventh characters are space characters
+
+    if (date[3] !== ' ' && date[6] !== ' ') {
+
+      isConsistent = false
+
+    }
+
+    //check if the fifth and sixth characters are <= 31
+
+    const dateStr = `${date[4]}${date[5]}`
+    const dateInt = parseInt(dateStr)
+
+    if (dateInt < 0 || dateInt > 31 || dateInt === NaN) {
+
+      isConsistent = false
+
+    }
+
+    //check if the eighth, nineth, tenth, eleventh characters are > 0
+
+    const yearStr = `${date[7]}${date[8]}${date[9]}${date[10]}`
+    const yearInt = parseInt(yearStr)
+
+    if (yearInt <= 0 || yearInt === NaN) {
+
+      isConsistent = false
+
+    }
+
+
+  })
+
+  return isConsistent
+
+}
+
+function formatDate(dataArray, arrayType) {
+
+  //convert the MMM-DD-YYYY format to YYYY-MM-DD
+
+  dataArray.forEach((date, i) => {
+
+    let year;
+    let month;
+    let day;
+
+    year = `${date[7]}${date[8]}${date[9]}${date[10]}`
+    day = `${date[4]}${date[5]}`
+
+    const firstThreeLetters = `${date[0]}${date[1]}${date[2]}`
+
+    const monthAbbrev = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+
+    monthAbbrev.forEach((obj, i) => {
+
+      if (obj === firstThreeLetters) {
+
+        const monthNumber = i + 1
+        month = monthNumber.toString()
+        
+
+      }
+
+    })
+
+    //prevent ambiguous formatting by adding leading 0s
+
+    if (month.length === 1) {
+
+      month = `0${month}`
+
+    }
+
+    if (day.length === 1) {
+
+      day = `0${month}`
+
+    }
+
+
+    //combine and replace
+    if (arrayType === 'embarkation') {
       
-      list.innerHTML += `${obj.name} ${obj.embark} - ${obj.disembark}<br>`
+      readableEmbarkationArray.push(dataArray[i])
+      
+    } else if (arrayType === 'disembarkation') {
+      
+      readableDisembarkationArray.push(dataArray[i])
       
     }
     
+    //replace the dates
+    dataArray[i] = `${year}-${month}-${day}`
+
+  })
+
+}
+
+function toUnixEpoch() {
+
+  //for embarkation
+  embarkationArray.forEach((obj, i) => {
+
+    const epoch = new Date(obj)
+
+    chronEmbarkationArray.push(epoch)
+
+  });
+
+  //for disembarkation
+  disembarkationArray.forEach((obj, i) => {
+
+    const epoch = new Date(obj)
+
+    chronDisembarkationArray.push(epoch)
+
+  })
+
+}
+
+function combineAllInfo() {
+  //empty the array
+  combinedInfoArray = []
+
+  //create empty objects in the array
+  for (let i = 0; i < familyNameArray.length; i++) {
+
+    combinedInfoArray.push({})
+
+  }
+
+
+  familyNameArray.forEach((famName, i) => {
+
+    const slot = combinedInfoArray[i]
+
+    slot.familyName = famName
+    slot.givenName = givenNameArray[i]
+    slot.rank = rankArray[i]
+    slot.birthday = birthdayArray[i]
+    slot.birthPlace = birthPlaceArray[i]
+    slot.gender = genderArray[i]
+    slot.idNum = idNumArray[i]
+    slot.idExpiry = idExpiryArray[i]
+    slot.embarkation = embarkationArray[i]
+    slot.disembarkation = disembarkationArray[i]
+    slot.returnee = returneeArray[i]
+
+    slot.chronEmbarkation = chronEmbarkationArray[i]
+    slot.chronDisembarkation = chronDisembarkationArray[i]
+    
+    slot.readableEmbarkation = readableEmbarkationArray[i]
+    slot.readableDisembarkation = readableDisembarkationArray[i]
+
+  })
+
+}
+
+function generateInputPreviewContent() {
+
+  //clear first the table
+  previewTableBody.innerHTML = ''
+
+  combinedInfoArray.forEach((obj, i) => {
+
+    previewTableBody.innerHTML += `
+    
+    <tr>
+      <td>${obj.familyName}</td>
+      <td>${obj.givenName}</td>
+      <td>${obj.rank}</td>
+      <td>${obj.birthday}</td>
+      <td>${obj.birthPlace}</td>
+      <td>${obj.gender}</td>
+      <td>${obj.idNum}</td>
+      <td>${obj.idExpiry}</td>
+      <td>${obj.readableEmbarkation}</td>
+      <td>${obj.readableDisembarkation}</td>
+      <td>${obj.returnee}</td>
+    </tr>
+    
+    `
+  })
+
+}
+
+////////////////////////////////////////
+//
+//[SECTION] FOR CHECKING FOR DUPLICATES
+//
+////////////////////////////////////////
+
+const pushToDatabaseBtn = document.getElementById('pushToDatabaseBtn')
+
+const inputDupTableBody = document.getElementById('inputDupTableBody')
+const databaseDupTableBody = document.getElementById('databaseDupTableBody')
+
+pushToDatabaseBtn.addEventListener('click', function() {
+
+  checkForInputDuplicates()
+  hide('inputPreviewDiv')
+
+  show('duplicateReviewDiv')
+
+  if (foundInputDuplicatesArray.length === 0) {
+
+    show('noInputDupText')
+    hide('inputDupTable')
+
+  } else if (foundInputDuplicatesArray.length > 0) {
+
+    hide('noInputDupText')
+    show('inputDupTable')
+    
+    generateInputDupTable()
+
+  }
+  
+  ///////////)
+
+  if (foundDatabaseDuplicatesArray.length === 0) {
+
+    show('noDatabaseDupText')
+    hide('databaseDupTable')
+
+  } else if (foundDatabaseDuplicatesArray.length > 0) {
+
+    hide('noDatabaseDupText')
+    show('databaseDupTable')
+
+  }
+  
+  if (foundInputDuplicatesArray.length === 0 && foundDatabaseDuplicatesArray.length === 0) {
+  
+    show('closeDupReviewBtn')
+  
+  }
+
+})
+
+const closeDupReviewBtn = document.getElementById('closeDupReviewBtn')
+
+closeDupReviewBtn.addEventListener('click', function() {
+  
+  hide('duplicateReviewDiv')
+  
+})
+
+let MAINDATABASEARRAY = []
+
+let nonDuplicatesArray = []
+let foundInputDuplicatesArray = []
+let foundDatabaseDuplicatesArray = []
+
+
+function checkForInputDuplicates() {
+
+  //reset the arrays
+  nonDuplicatesArray = []
+  foundInputDuplicatesArray = []
+  foundDatabaseDuplicatesArray = []
+
+  let nonInputDuplicatesArray = []
+
+  combinedInfoArray.forEach((comparing, i) => {
+
+    let count = 0
+
+    combinedInfoArray.forEach((comparedTo, j) => {
+
+      if (comparing.familyName === comparedTo.familyName && comparing.givenName === comparedTo.givenName) {
+
+        count++
+
+      }
+
+    })
+
+    if (count === 1) {
+
+      nonInputDuplicatesArray.push(comparing)
+
+    } else if (count > 1) {
+
+      foundInputDuplicatesArray.push(comparing)
+
+    } else {
+
+      console.error('unrecognized input count')
+
+    }
+
+  })
+
+  //to call database duplicate checker function
+
+  checkForDatabaseDuplicates(nonInputDuplicatesArray)
+
+}
+
+function checkForDatabaseDuplicates(passedArray) {
+
+  passedArray.forEach((comparing, i) => {
+
+    if (MAINDATABASEARRAY.length === 0) {
+
+      nonDuplicatesArray.push(comparing)
+
+    } else if (MAINDATABASEARRAY.length > 0) {
+
+      let count = 0
+
+      MAINDATABASEARRAY.forEach((comparedTo, j) => {
+
+        if (comparing.familyName === comparedTo.familyName && comparing.givenName === comparedTo.givenName) {
+
+          count++
+
+        }
+
+      });
+
+      if (count === 0) {
+
+        nonDuplicatesArray.push(comparing)
+
+      } else if (count > 0) {
+
+        foundDatabaseDuplicatesArray.push(comparing)
+
+      } else {
+
+        console.error('unrecognized duplicate count')
+
+      }
+
+    }
+
+
+  })
+  
+  pushValidEntriesToDatabase()
+
+}
+
+function pushValidEntriesToDatabase() {
+  
+  nonDuplicatesArray.forEach((obj, i) => {
+    
+    MAINDATABASEARRAY.push(obj)
     
   })
   
-}
-
-function resetList() {
-  
-  list.innerHTML = ''
+  nonDuplicatesArray = []
   
 }
 
+function generateInputDupTable() {
+  
+  inputDupTableBody.innerHTML = ''
+  
+  if (foundInputDuplicatesArray.length === 0) {
 
+    show('noInputDupText')
+    hide('inputDupTable')
+    hide('inputDupHead')
 
+  } else if (foundInputDuplicatesArray.length > 0) {
 
-const saveJsonBtn = document.getElementById('saveJsonBtn')
+    hide('noInputDupText')
+    show('inputDupTable')
+    show('inputDupHead')
 
-saveJsonBtn.addEventListener('click', function() {
+  }
+  
+  if (foundDatabaseDuplicatesArray.length === 0) {
+  
+    show('noDatabaseDupText')
+    hide('databaseDupTable')
+    hide('databaseDupHead')
+  
+  } else if (foundDatabaseDuplicatesArray.length > 0) {
+  
+    hide('noDatabaseDupText')
+    show('databaseDupTable')
+    show('databaseDupHead')
+  
+  }
+  
+  if (foundInputDuplicatesArray.length === 0 && foundDatabaseDuplicatesArray.length === 0) {
+    
+    show('closeDupReviewBtn')
+    
+  }
+    
+    foundInputDuplicatesArray.forEach((obj, i) => {
+      
+      inputDupTableBody.innerHTML += `
+      
+      <tr>
+        <td>${obj.familyName}</td>
+        <td>${obj.givenName}</td>
+        <td>${obj.readableEmbarkation}</td>
+        <td>${obj.readableDisembarkation}</td>
+        <td>${obj.returnee}</td>
+        <td>
+          <button onclick='manualAddInputDup(${i})'>Add</button>
+        </td>
+      </tr>
+      
+      `
+      
+    })
+  
+}
+
+function manualAddInputDup(i) {
+  
+  let toTestForDatabase = []
+  
+  toTestForDatabase.push(foundInputDuplicatesArray[i])
+  
+  //test for dup im database
+  checkForDatabaseDuplicates(toTestForDatabase)
+  //re-generate database dup table
+  generateDatabaseDupTable()
+  
+  //then splice 
+  foundInputDuplicatesArray.splice(i, 1)
+  
+  generateInputDupTable()
+  
+}
+
+function generateDatabaseDupTable() {
+  
+  databaseDupTableBody.innerHTML = ''
+  
+  if (foundInputDuplicatesArray.length === 0) {
+  
+    show('noInputDupText')
+    hide('inputDupTable')
+    hide('inputDupHead')
+  
+  } else if (foundInputDuplicatesArray.length > 0) {
+  
+    hide('noInputDupText')
+    show('inputDupTable')
+    show('inputDupHead')
+  
+    generateInputDupTable()
+  
+  }
+  
+  if (foundDatabaseDuplicatesArray.length === 0) {
+
+    show('noDatabaseDupText')
+    hide('databaseDupTable')
+    hide('databaseDupHead')
+
+  } else if (foundDatabaseDuplicatesArray.length > 0) {
+
+    hide('noDatabaseDupText')
+    show('databaseDupTable')
+    show('databaseDupHead')
+
+  }
+  
+  if (foundInputDuplicatesArray.length === 0 && foundDatabaseDuplicatesArray.length === 0) {
+    
+    show('closeDupReviewBtn')
+    
+  }
+    
+    foundDatabaseDuplicatesArray.forEach((obj, i) => {
+      
+      databaseDupTableBody.innerHTML += `
+      
+      <tr>
+        <td>${obj.familyName}</td>
+        <td>${obj.givenName}</td>
+        <td>${obj.readableEmbarkation}</td>
+        <td>${obj.readableDisembarkation}</td>
+        <td>${obj.returnee}</td>
+        <td>
+          <button onclick='manualAddDatabaseDup(${i})'>Add</button>
+        </td>
+      </tr>
+      
+      `
+      
+    })
+  
+}
+
+function manualAddDatabaseDup(i) {
+  
+  MAINDATABASEARRAY.push(foundDatabaseDuplicatesArray[i])
+  
+  //then splice 
+  foundDatabaseDuplicatesArray.splice(i, 1)
+  //re-generate database dup table
+  generateDatabaseDupTable()
+  
+}
+
+////////////////////////////////////////
+//
+//[SECTION] FOR SHOWING AND SAVING DATABASE
+//
+////////////////////////////////////////
+
+const fullDatabaseBtn = document.getElementById('fullDatabaseBtn')
+
+const fullDatabaseTableBody = document.getElementById('fullDatabaseTableBody')
+
+const closeFullDatabaseBtn = document.getElementById('closeFullDatabaseBtn')
+
+const downloadDatabaseBtn = document.getElementById('downloadDatabaseBtn')
+
+fullDatabaseBtn.addEventListener('click', function() {
+  
+  generateFullDatabase()
+  show('fullDatabaseTable')
+  hide('fullDatabaseBtn')
+  show('closeFullDatabaseBtn')
+  show('downloadDatabaseBtn')
+  
+})
+
+closeFullDatabaseBtn.addEventListener('click', function() {
+  
+  hide('fullDatabaseTable')
+  show('fullDatabaseBtn')
+  hide('closeFullDatabaseBtn')
+  hide('downloadDatabaseBtn')
+  
+  
+})
+
+downloadDatabaseBtn.addEventListener('click', function() {
   
   saveJson()
   
 })
 
-//TO SAVE THE DATABASE ARRAY AS A JSON
+function generateFullDatabase() {
+  
+  const tbody = fullDatabaseTableBody
+  
+  tbody.innerHTML = ''
+  
+  MAINDATABASEARRAY.forEach((obj, i) => {
 
-function saveJson() {
-  
-  const json = JSON.stringify(crewlistDatabase, null, 2); //Stringify with pretty printing
-  
-  const blob = new Blob([json], { type: "application/json" }); // Create the Blob
-  
-  const url = URL.createObjectURL(blob); // Create a URL for the Blob
-  
-  const a = document.createElement("a");
-  a.style.display = "none";
-  a.href = url;
-  a.download = "crewlistDatabase.json";
-  document.body.appendChild(a);
-  a.click();
-  URL.revokeObjectURL(url); // Clean up
+    tbody.innerHTML += `
+    
+    <tr>
+      <td>${obj.familyName}</td>
+      <td>${obj.givenName}</td>
+      <td>${obj.rank}</td>
+      <td>${obj.birthday}</td>
+      <td>${obj.birthPlace}</td>
+      <td>${obj.gender}</td>
+      <td>${obj.idNum}</td>
+      <td>${obj.idExpiry}</td>
+      <td>${obj.readableEmbarkation}</td>
+      <td>${obj.readableDisembarkation}</td>
+      <td>${obj.returnee}</td>
+    </tr>
+    
+    `
+  })
   
 }
 
-//TO LOAD THE JSON AND POPULATE THE ARRAY
+
+
+
+//TO SAVE THE DATABASE ARRAY AS A JSON
+
+function saveJson() {
+
+  const json = JSON.stringify(MAINDATABASEARRAY, null, 2); //Stringify with pretty printing
+
+  const blob = new Blob([json], { type: "application/json" }); // Create the Blob
+
+  const url = URL.createObjectURL(blob); // Create a URL for the Blob
+
+  const a = document.createElement("a");
+  a.style.display = "none";
+  a.href = url;
+  a.download = "MAINCREWLISTDATABASE.json";
+  document.body.appendChild(a);
+  a.click();
+  URL.revokeObjectURL(url); // Clean up
+
+}
+
+
+
+
+//TO LOAD JSON DATABASE FILE
 
 const databaseUploadInput = document.getElementById('databaseUploadInput')
+
 const loadFileBtn = document.getElementById('loadFileBtn')
 
-loadFileBtn.addEventListener('click', function() {
+loadFileBtn.addEventListener('click', function () {
   
   loadJson()
   
 })
 
 function loadJson() {
-  
+
   const file = databaseUploadInput.files[0]
-  
+
   const reader = new FileReader()
-  
+
   reader.onload = function(e) {
-    
-    crewlistDatabase = JSON.parse(e.target.result)
-    
+
+    MAINDATABASEARRAY = JSON.parse(e.target.result)
+
     //to convert the JSON string into date objects
-    crewlistDatabase.forEach((obj, i) => {
-      
-      obj.chronEmbark = new Date(obj.chronEmbark)
-      obj.chronDisembark = new Date(obj.chronDisembark)
-      
+    MAINDATABASEARRAY.forEach((obj, i) => {
+
+      obj.chronEmbarkation = new Date(obj.chronEmbarkation)
+      obj.chronDisembarkation = new Date(obj.chronDisembarkation)
+
     })
-    
+
   }
-  
+
   reader.readAsText(file)
+
+}
+
+
+
+//TO GENERATE REQUESTED CREWLIST
+
+const crewlistDatePickerInput = document.getElementById('crewlistDatePickerInput')
+
+const generatedCrewlistTableBody = document.getElementById('generatedCrewlistTableBody')
+
+const crewlistGeneratorBtn = document.getElementById('crewlistGeneratorBtn')
+
+crewlistGeneratorBtn.addEventListener('click', function() {
+  
+  filterBasedOnDate()
+  generateCrewlist()
+  show('generatedCrewlistTable')
+  
+})
+
+let crewlistToBeGeneratedArray = []
+
+function filterBasedOnDate() {
+  //clear the array
+  crewlistToBeGeneratedArray = []
+
+  MAINDATABASEARRAY.forEach((obj, i) => {
+
+    
+    const crewListDate = new Date(crewlistDatePickerInput.value)
+
+    if (obj.chronEmbarkation <= crewListDate && obj.chronDisembarkation >= crewListDate) {
+
+      crewlistToBeGeneratedArray.push(obj)
+
+    }
+
+
+  })
+
+}
+
+function generateCrewlist() {
+  
+  generatedCrewlistTableBody.innerHTML = ''
+  
+  crewlistToBeGeneratedArray.forEach((obj, i) => {
+
+    generatedCrewlistTableBody.innerHTML += `
+    
+    <tr>
+      <td>${i + 1}</td>
+      <td>${obj.familyName}</td>
+      <td>${obj.givenName}</td>
+      <td>${obj.rank}</td>
+      <td>FILIPINO</td>
+      <td>${obj.birthday}</td>
+      <td>${obj.birthPlace}</td>
+      <td>${obj.gender}</td>
+      <td>SIRB/SRB</td>
+      <td>${obj.idNum}</td>
+      <td>PHILIPPINES</td>
+      <td>${obj.idExpiry}</td>
+      <td>${obj.readableEmbarkation}</td>
+      <td>${obj.readableDisembarkation}</td>
+      <td>${obj.returnee}</td>
+    </tr>
+    
+    `
+  })
   
 }
 
-//test function for txt saving
+//FOR SAVING AS TXT FILE
 
-const testArray = 
-[
-  {name: 'Mendoza', embark: '21-Jan-2024', disembark: '21-Feb-2024'}, 
-  {name: 'Rogador', embark: '03-Jan-2024', disembark: '13-Mar-2024'},
-  {name: 'Evin', embark: '19-Jan-2024', disembark: '09-Feb-2024'}, 
-  {name: 'Sacayanan', embark: '21-Feb-2024', disembark: '03-Mar-2024'}
-]
+const saveTxtBtn = document.getElementById('saveTxtBtn')
 
-const printTxtBtn = document.getElementById('printTxtBtn')
-
-printTxtBtn.addEventListener('click', function() {
+saveTxtBtn.addEventListener('click', function() {
   
   saveTxt()
   
@@ -211,11 +1064,11 @@ printTxtBtn.addEventListener('click', function() {
 
 function saveTxt() {
   let text = ''
-  
-  testArray.forEach((obj, i) => {
-    
-    text += `${obj.name}\t${obj.embark}\t${obj.disembark}\n`
-    
+
+  crewlistToBeGeneratedArray.forEach((obj, i) => {
+
+    text += `${i + 1}\t${obj.familyName}\t${obj.givenName}\t${obj.rank}\tFILIPINO\t${obj.birthday}\t${obj.birthPlace}\t${obj.gender}\tSIRB/SRB\t${obj.idNum}\tPHILIPPINES\t${obj.idExpiry}\n`
+
   })
 
   const blob = new Blob([text], { type: "text/plain" });
@@ -223,10 +1076,8 @@ function saveTxt() {
   const a = document.createElement("a");
   a.style.display = "none";
   a.href = url;
-  a.download = "testArray.txt";
+  a.download = "txtCrewlist.txt";
   document.body.appendChild(a);
   a.click();
   URL.revokeObjectURL(url);
 }
-
-

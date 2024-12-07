@@ -405,7 +405,9 @@ function checkForConsistentDateFormatting(dataArray) {
 
     //check if the date provided has 11 characters
     if (date.length !== 11) {
+
       console.log("date length inconsistent")
+      console.log(date)
       isConsistent = false
 
     }

@@ -140,7 +140,7 @@ const previewTableBody = document.getElementById('previewTableBody')
 
 //event listeners
 inputPreviewBtn.addEventListener('click', function() {
-
+  console.log('function called')
   //acquire the values of input
   acquireInputValues()
 
@@ -390,7 +390,8 @@ function checkArrayLengths() {
     }
 
   })
-
+  console.log(identical)
+  
   return identical
 
 }
@@ -634,7 +635,7 @@ const inputDupTableBody = document.getElementById('inputDupTableBody')
 const databaseDupTableBody = document.getElementById('databaseDupTableBody')
 
 pushToDatabaseBtn.addEventListener('click', function() {
-
+  
   checkForInputDuplicates()
   hide('inputPreviewParentDiv')
   hide('inputPreviewDiv')

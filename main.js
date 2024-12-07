@@ -285,7 +285,7 @@ function acquireInputValues() {
 
   //for returnee identifier
   separateBatchData(returneeStr, returneeArray)
-
+console.log('acquire func called')
 }
 
 //to reset all arrays of batch input

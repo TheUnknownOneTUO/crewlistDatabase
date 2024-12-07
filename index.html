@@ -17,302 +17,352 @@
 
 <body>
 
-  <div id="jsonLoaderDiv">
+  <div id="navigationBar">
 
-    <label for="databaseUploadInput">Upload Database</label>
-    <br>
-    <input type="file" id="databaseUploadInput" accept=".json">
-    <br>
-    <button id="loadFileBtn">Load File</button>
-
-  </div>
-
-  <div id="inputDiv">
-    
-    <h2>INPUT INFO</h2>
-
-    <label for="familyNameInput">Family Name</label>
-    <input type="text" id="familyNameInput">
-    <br>
-    
-    <label for="givenNameInput">Given Name</label>
-    <input type="text" id="givenNameInput">
-    <br>
-    
-    <label for="rankInput">Rank</label>
-    <input type="text" id="rankInput">
-    <br>
-    
-    <label for="birthdayInput">Date of Birth</label>
-    <input type="text" id="birthdayInput">
-    <br>
-    
-    <label for="birthPlaceInput">Place of Birth</label>
-    <input type="text" id="birthPlaceInput">
-    <br>
-    
-    <label for="genderInput">Gender</label>
-    <input type="text" id="genderInput">
-    <br>
-    
-    <label for="idNumInput">ID Number</label>
-    <input type="text" id="idNumInput">
-    <br>
-    
-    <label for="idExpiryInput">ID Expiration Date</label>
-    <input type="text" id="idExpiryInput">
-    <br>
-    
-    <label for="embarkationInput">Embarkation Date</label>
-    <input type="text" id="embarkationInput">
-    <br>
-    
-    <label for="disembarkationInput">Disembarkation Date</label>
-    <input type="text" id="disembarkationInput">
-    <br>
-    
-    <label for="returneeInput">Returnee</label>
-    <input type="text" id="returneeInput">
-    <br>
-    
-    <button id="inputPreviewBtn">Preview</button>
-    
-    
+    <div id="homeNavBtn">Home</div>
+    <div id="databaseNavBtn">Database</div>
+    <div id="crewlistNavBtn">Crewlist</div>
+    <div id="othersNavBtn">Others</div>
 
   </div>
 
-  <div id="inputPreviewDiv" class="isHidden">
+  <!--MainPage (start)-->
 
-    <table id="previewTable">
-      
-      <thead>
-        <tr id="previewRow">
-          <th>
-            Family Name
-          </th>
-          <th>
-            Given Name
-          </th>
-          <th>
-            Rank
-          </th>
-          <th>
-            Birthday
-          </th>
-          <th>
-            Birth Place
-          </th>
-          <th>
-            Gender
-          </th>
-          <th>
-            ID Number
-          </th>
-          <th>
-            ID Expiration Date
-          </th>
-          <th>
-            Embarkation Date
-          </th>
-          <th>
-            Disembarkation Date
-          </th>
-          <th>
-            Returnee
-          </th>
-        </tr>
-      </thead>
-      
-      <tbody id="previewTableBody">
-        
-      </tbody>
-      
-    </table>
-    
+  <div id="inputHomeDiv">
+
+    <div id="inputHomeTextDiv">
+      <h1>CREWLISTIFICATOR</h1>
+      <p>Innovate. Organize. Automate. Optimize.</p>
+    </div>
+
+    <div id="inputDiv">
+
+      <h2>INPUT INFO</h2>
+
+      <div id="inputFieldsDiv">
+        <label for="familyNameInput">Family Name</label>
+        <input type="text" id="familyNameInput">
+
+        <label for="givenNameInput">Given Name</label>
+        <input type="text" id="givenNameInput">
+
+        <label for="rankInput">Rank</label>
+        <input type="text" id="rankInput">
+
+        <label for="birthdayInput">Date of Birth</label>
+        <input type="text" id="birthdayInput">
+
+        <label for="birthPlaceInput">Place of Birth</label>
+        <input type="text" id="birthPlaceInput">
+
+        <label for="genderInput">Gender</label>
+        <input type="text" id="genderInput">
+
+        <label for="idNumInput">ID Number</label>
+        <input type="text" id="idNumInput">
+
+        <label for="idExpiryInput">ID Expiration Date</label>
+        <input type="text" id="idExpiryInput">
+
+        <label for="embarkationInput">Embarkation Date</label>
+        <input type="text" id="embarkationInput">
+
+        <label for="disembarkationInput">Disembarkation Date</label>
+        <input type="text" id="disembarkationInput">
+
+        <label for="returneeInput">Returnee</label>
+        <input type="text" id="returneeInput">
+      </div>
+
+      <button id="inputPreviewBtn">Preview</button>
+
+    </div>
+  </div>
+
+  <!--MainPage (end)-->
+
+
+
+  <!--Input Preview Div (start)-->
+  <div id="inputPreviewParentDiv" class="transparentBG isHidden">
+
+    <div id="inputPreviewDiv" class="isHidden">
+
+      <table id="previewTable">
+
+        <thead>
+          <tr id="previewRow">
+            <th>
+              Family Name
+            </th>
+            <th>
+              Given Name
+            </th>
+            <th>
+              Rank
+            </th>
+            <th>
+              Birthday
+            </th>
+            <th>
+              Birth Place
+            </th>
+            <th>
+              Gender
+            </th>
+            <th>
+              ID Number
+            </th>
+            <th>
+              ID Expiration Date
+            </th>
+            <th>
+              Embarkation Date
+            </th>
+            <th>
+              Disembarkation Date
+            </th>
+            <th>
+              Returnee
+            </th>
+          </tr>
+        </thead>
+
+        <tbody id="previewTableBody">
+
+        </tbody>
+
+      </table>
+
+    </div>
+
     <button id="pushToDatabaseBtn">Push to Database</button>
 
   </div>
-  
-  <div id="duplicateReviewDiv" class="isHidden">
-    
+  <!--Input Preview Div (end)-->
+
+  <div id="duplicateReviewParentDiv" class="transparentBG isHidden">
+
     <h2>REVIEW DUPLICATE ENTRIES</h2>
-    
-    <p id="noInputDupText" class="isHidden">NO DUPLICATE INPUT</p>
-    
-    <h3 id="inputDupHead">FOUND DUPLICATES IN INPUT FIELDS</h3>
-    
-    <table id="inputDupTable" class="isHidden">
-      <thead>
-        <tr id="inputDupRow">
-          <th>FAMILY NAME</th>
-          <th>GIVEN NAME</th>
-          <th>EMBARKATION</th>
-          <th>DISEMBARKATION</th>
-          <th>RETURNEE</th>
-          <th></th>
-        </tr>
-      </thead>
-      
-      <tbody id="inputDupTableBody">
-        
-      </tbody>
-    </table>
-    
-    <p id="noDatabaseDupText" class="isHidden">NO DUPLICATE IN DATABASE</p>
-    
-    <h3 id="databaseDupHead">FOUND DUPLICATES IN THE DATABASE</h3>
-    
-    <table id="databaseDupTable" class="isHidden">
-      <thead>
-        <tr id="databaseDupRow">
-          <th>FAMILY NAME</th>
-          <th>GIVEN NAME</th>
-          <th>EMBARKATION</th>
-          <th>DISEMBARKATION</th>
-          <th>RETURNEE</th>
-          <th></th>
-        </tr>
-      </thead>
-      
-      <tbody id="databaseDupTableBody">
-        
-      </tbody>
-    </table>
-    
-    <button id="closeDupReviewBtn">Close</button>
-    
+
+    <div id="duplicateReviewDiv" class="isHidden">
+
+      <p id="noInputDupText" class="isHidden">NO DUPLICATE INPUT</p>
+
+      <h3 id="inputDupHead">FOUND DUPLICATES IN INPUT FIELDS</h3>
+
+      <div id="inputDupTableDiv">
+        <table id="inputDupTable" class="isHidden">
+          <thead>
+            <tr id="inputDupRow">
+              <th>FAMILY NAME</th>
+              <th>GIVEN NAME</th>
+              <th>EMBARKATION</th>
+              <th>DISEMBARKATION</th>
+              <th>RETURNEE</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody id="inputDupTableBody">
+
+          </tbody>
+        </table>
+      </div>
+
+      <p id="noDatabaseDupText" class="isHidden">NO DUPLICATE IN DATABASE</p>
+
+      <h3 id="databaseDupHead">FOUND DUPLICATES IN THE DATABASE</h3>
+
+      <div id="databaseDupTableDiv">
+        <table id="databaseDupTable" class="isHidden">
+          <thead>
+            <tr id="databaseDupRow">
+              <th>FAMILY NAME</th>
+              <th>GIVEN NAME</th>
+              <th>EMBARKATION</th>
+              <th>DISEMBARKATION</th>
+              <th>RETURNEE</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody id="databaseDupTableBody">
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <button id="closeDupReviewBtn">Close Review</button>
+
   </div>
 
-  <div id="crewlistPreviewDiv">
+  <!--Input DATABASE Div (start)-->
+  <div id="fullDatabaseParentDiv" class="isHidden">
 
+    <h1>CREWLISTIFICATOR</h1>
+    <h2 class="">DATABASE</h2>
 
+    <div id="jsonLoaderDiv" class="">
 
-  </div>
+      <label for="databaseUploadInput">Upload Database</label>
+      <br>
+      <input type="file" id="databaseUploadInput" accept=".json">
+      <br>
+      <button id="loadFileBtn">Load File</button>
 
-  <div id="fullDatabaseDiv">
-    
-    <h2>CREWLIST DATABASE</h2>
+    </div>
 
     <button id="fullDatabaseBtn" class="">SHOW FULL DATABASE</button>
-    
-    <table id="fullDatabaseTable" class="isHidden">
-      
-      <thead>
-        <tr id="fullDatabaseRow">
-          <th>
-            Family Name
-          </th>
-          <th>
-            Given Name
-          </th>
-          <th>
-            Rank
-          </th>
-          <th>
-            Birthday
-          </th>
-          <th>
-            Birth Place
-          </th>
-          <th>
-            Gender
-          </th>
-          <th>
-            ID Number
-          </th>
-          <th>
-            ID Expiration Date
-          </th>
-          <th>
-            Embarkation Date
-          </th>
-          <th>
-            Disembarkation Date
-          </th>
-          <th>
-            Returnee
-          </th>
-        </tr>
-      </thead>
-      
-      <tbody id="fullDatabaseTableBody">
-        
-      </tbody>
-      
-    </table>
-    
+
+    <div id="fullDatabaseDiv" class="">
+
+      <table id="fullDatabaseTable" class="isHidden">
+
+        <thead>
+          <tr id="fullDatabaseRow">
+            <th>
+              Family Name
+            </th>
+            <th>
+              Given Name
+            </th>
+            <th>
+              Rank
+            </th>
+            <th>
+              Birthday
+            </th>
+            <th>
+              Birth Place
+            </th>
+            <th>
+              Gender
+            </th>
+            <th>
+              ID Number
+            </th>
+            <th>
+              ID Expiration Date
+            </th>
+            <th>
+              Embarkation Date
+            </th>
+            <th>
+              Disembarkation Date
+            </th>
+            <th>
+              Returnee
+            </th>
+          </tr>
+        </thead>
+
+        <tbody id="fullDatabaseTableBody">
+
+        </tbody>
+
+      </table>
+
+    </div>
+
     <button id="downloadDatabaseBtn" class="isHidden">DOWNLOAD DATABASE</button>
     <button id="closeFullDatabaseBtn" class="isHidden">Close</button>
 
   </div>
-  
-  <div id="crewlistGeneratorDiv">
-    
-    <h2>CREWLIST GENERATOR</h2>
-    <label for="crewlistDatePickerInput">Choose Date</label>
-    <input type="date" id="crewlistDatePickerInput">
-    <button id="crewlistGeneratorBtn">Generate Crewlist</button>
-    
-    <table id="generatedCrewlistTable" class="isHidden">
+
+  <div id="crewlistGeneratorParentDiv" class="isHidden">
+    <div id="crewlistGeneratorDiv">
+
+      <h1>CREWLISTIFICATOR</h1>
+      <h2>CREWLIST GENERATOR</h2>
+      <label for="crewlistDatePickerInput">Choose Date</label>
+      <input type="date" id="crewlistDatePickerInput">
+      <button id="crewlistGeneratorBtn">Generate Crewlist</button>
       
-      <thead>
-        <tr id="generatedCrewlistRow">
-          <th>
-            No.
-          </th>
-          <th>
-            Family Name
-          </th>
-          <th>
-            Given Name
-          </th>
-          <th>
-            Rank or Rating
-          </th>
-          <th>
-            Nationality
-          </th>
-          <th>
-            Date of Birth
-          </th>
-          <th>
-            Place of Birth
-          </th>
-          <th>
-            Gender
-          </th>
-          <th>
-            Nature of Identity Document
-          </th>
-          <th>
-            Number of Identity Document
-          </th>
-          <th>
-            Issuing State of Identity Document
-          </th>
-          <th>
-            Expiry Date of Identity Document
-          </th>
-          <th>
-            Embarkation Date
-          </th>
-          <th>
-            Disembarkation Date
-          </th>
-          <th>
-            Returnee
-          </th>
-        </tr>
-      </thead>
       
-      <tbody id="generatedCrewlistTableBody">
-        
-      </tbody>
-      
-    </table>
+      <div id="generatedCrewlistTableDiv">
+        <table id="generatedCrewlistTable" class="isHidden">
+
+          <thead>
+            <tr id="generatedCrewlistRow">
+              <th>
+                No.
+              </th>
+              <th>
+                Family Name
+              </th>
+              <th>
+                Given Name
+              </th>
+              <th>
+                Rank or Rating
+              </th>
+              <th>
+                Nationality
+              </th>
+              <th>
+                Date of Birth
+              </th>
+              <th>
+                Place of Birth
+              </th>
+              <th>
+                Gender
+              </th>
+              <th>
+                Nature of Identity Document
+              </th>
+              <th>
+                Number of Identity Document
+              </th>
+              <th>
+                Issuing State of Identity Document
+              </th>
+              <th>
+                Expiry Date of Identity Document
+              </th>
+              <th>
+                Embarkation Date
+              </th>
+              <th>
+                Disembarkation Date
+              </th>
+              <th>
+                Returnee
+              </th>
+            </tr>
+          </thead>
+
+          <tbody id="generatedCrewlistTableBody">
+
+          </tbody>
+
+        </table>
+      </div>
+      <button id="saveTxtBtn" class="isHidden">Save as Text File</button>
+
+    </div>
+  </div>
+
+  <div id="otherFunctionsDiv" class="isHidden">
     
-    <button id="saveTxtBtn">Save as Text File</button>
+    <h1>Excel Formula Generator</h1>
     
+    <label for="columnForFormulaInput">COLUMN</label>
+    <input type="text" id="columnForFormulaInput">
+
+    <label for="rowStartForFormulaInput">STARTING ROW</label>
+    <input type="text" id="rowStartForFormulaInput">
+
+    <label for="rowEndForFormulaInput">ENDING ROW</label>
+    <input type="text" id="rowEndForFormulaInput">
+
+    <button id="generateFormulaBtn">Generate Formula</button>
+
+    <p id="formulaClipboard"><em>Copy Your Formula Here!</em></p>
+
   </div>
 
 

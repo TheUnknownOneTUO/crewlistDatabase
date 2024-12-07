@@ -167,7 +167,7 @@ body {
 
 }
 
-#inputPreviewDiv,
+/*#inputPreviewDiv,
 #duplicateReviewDiv,
 #fullDatabaseDiv {
 
@@ -176,6 +176,23 @@ body {
   overflow-x: auto;
   overflow-y: auto;
 
+}*/
+
+#inputPreviewDiv,
+#duplicateReviewDiv {
+
+  max-height: 70%;
+  width: 80%;
+  overflow-x: auto;
+  overflow-y: auto;
+
+}
+
+#fullDatabaseDiv {
+
+  width: 80%;
+  overflow-x: auto;
+  
 }
 
 #inputDupTableDiv,

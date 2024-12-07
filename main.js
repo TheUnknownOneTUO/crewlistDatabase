@@ -405,7 +405,7 @@ function checkForConsistentDateFormatting(dataArray) {
 
     //check if the date provided has 11 characters
     if (date.length !== 11) {
-
+      console.log("date length inconsistent")
       isConsistent = false
 
     }
@@ -431,7 +431,7 @@ function checkForConsistentDateFormatting(dataArray) {
     });
 
     if (!didMatched) {
-
+      console.log("month name inconsistent")
       isConsistent = false
 
     }
@@ -439,7 +439,7 @@ function checkForConsistentDateFormatting(dataArray) {
     //check if the fourth and seventh characters are space characters
 
     if (date[3] !== ' ' && date[6] !== ' ') {
-
+      console.log("spacing inconcsistent")
       isConsistent = false
 
     }
@@ -450,7 +450,7 @@ function checkForConsistentDateFormatting(dataArray) {
     const dateInt = parseInt(dateStr)
 
     if (dateInt < 0 || dateInt > 31 || dateInt === NaN) {
-
+      console.log("date numbering inconsistent")
       isConsistent = false
 
     }
@@ -461,7 +461,7 @@ function checkForConsistentDateFormatting(dataArray) {
     const yearInt = parseInt(yearStr)
 
     if (yearInt <= 0 || yearInt === NaN) {
-
+      console.log("year inconcsistent")
       isConsistent = false
 
     }

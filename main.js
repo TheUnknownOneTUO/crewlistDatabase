@@ -1389,17 +1389,17 @@ function generateExcelFormula() {
 
   //start of formula:
 
-  formulaClipboard.innerHTML += 'CONCATENATE('
+  formulaClipboard.innerHTML += '=CONCATENATE('
 
   for (let i = start; i <= end; i++) {
 
     if (i !== end) {
 
-      formulaClipboard.innerHTML += `'#', ${column}${i},`
+      formulaClipboard.innerHTML += `"#", ${column}${i},`
 
     } else if (i === end) {
 
-      formulaClipboard.innerHTML += `'#', ${column}${i}`
+      formulaClipboard.innerHTML += `"#", ${column}${i}`
 
     }
 

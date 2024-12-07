@@ -285,7 +285,9 @@ function acquireInputValues() {
 
   //for returnee identifier
   separateBatchData(returneeStr, returneeArray)
-console.log('acquire func called')
+  binaryDecoder(returneeArray)
+  
+  console.log('acquire func called')
 }
 
 //to reset all arrays of batch input
@@ -349,21 +351,21 @@ function separateBatchData(string, array) {
 
 }
 
-function binaryDecoder(string, array) {
+function binaryDecoder(array) {
 
-  for (let i = 0; i < string.length; i++) {
+   array.forEach((obj, i) => {
 
-    if (string[i] === '0') {
+      if (obj === '0') {
 
-      array.push(false)
+        array[i] = "NO"
+        
+      } else if (obj === '1') {
 
-    } else if (string[i] === '1') {
-
-      array.push(true)
-
-    }
-
-  }
+        array[i] = "YES"
+        
+      }
+     
+   })
 
 }
 

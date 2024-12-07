@@ -191,6 +191,8 @@ body {
 #fullDatabaseDiv {
 
   width: 80%;
+  height: 60%;
+  overflow-y: auto;
   overflow-x: auto;
   
 }

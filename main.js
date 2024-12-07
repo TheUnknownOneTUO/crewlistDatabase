@@ -149,7 +149,7 @@ inputPreviewBtn.addEventListener('click', function() {
   const isEmbarkationDateFormatConsistent = checkForConsistentDateFormatting(embarkationArray)
 
   if (!isEmbarkationDateFormatConsistent) {
-
+    console.log("embarkation date inconsistent")
     return
 
   }
@@ -159,7 +159,7 @@ inputPreviewBtn.addEventListener('click', function() {
   const isDisembarkationDateFormatConsistent = checkForConsistentDateFormatting(disembarkationArray)
 
   if (!isDisembarkationDateFormatConsistent) {
-
+    console.log("disembarkation date inconsistent")
     return
 
   }

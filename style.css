@@ -1,59 +1,394 @@
 body {
-    font-size: 15pt;
+  font-size: 15pt;
+  background-image: linear-gradient(to right, #274B74, #E963FD);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100svh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+
 }
 
 .isHidden {
-  
-  display: none;
-  
+
+  display: none !important;
+
 }
 
 #jsonLoaderDiv {
-  
-  padding: 10px;
-  background: lightblue;
-  
+
+  padding: 5px;
+  display: flex;
+  border: solid 0.1rem ghostwhite;
+  margin: 2rem;
+  color: white;
+
+}
+
+#navigationBar {
+
+  width: 95%;
+  background: ghostwhite;
+  /*margin-bottom: 5rem;*/
+  display: flex;
+  /*height: 3rem;*/
+  align-items: center;
+  padding-left: 2rem;
+
+}
+
+#navigationBar div {
+
+  box-sizing: border-box;
+  font-family: verdana;
+  font-size: 0.8rem;
+  height: 100%;
+  padding: 0.5rem;
+
+}
+
+#inputHomeDiv {
+
+  width: 80vw;
+  height: 80%;
+  box-sizing: border-box;
+  margin: 2rem;
+  display: flex;
+  align-items: space-between;
+  justify-content: space-between;
+  /*background: black;*/
+
 }
 
 #inputDiv {
-  
-  padding: 10px;
-  
+
+  padding: 2.5rem;
+  box-sizing: border-box;
+  background: ghostwhite;
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
 }
 
-#inputPreviewDiv, #duplicateReviewDiv, #fullDatabaseDiv, #crewlistGeneratorDiv {
-  
-  height: 70%;
-  width: 90%;
+#inputDiv h2 {
+
+  padding: 0;
+  margin: 0;
+  font-family: Impact;
+  text-align: center;
+
+}
+
+#inputDiv label {
+
+  font-family: verdana;
+  font-size: 0.5rem;
+
+}
+
+#inputHomeTextDiv {
+
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-right: 2rem;
+
+}
+
+#inputHomeTextDiv h1 {
+
+  font-family: Impact;
+  font-size: 3rem;
+  margin: 0;
+
+}
+
+#inputHomeTextDiv p {
+
+  font-size: 0.6rem;
+  font-family: verdana;
+  text-align: end;
+  margin: 0;
+  width: 50%;
+
+}
+
+
+#inputDiv input {
+
+  background: gainsboro;
+  height: 3rem;
+  margin-bottom: 1rem;
+
+}
+
+#inputFieldsDiv {
+
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100%;
+
+}
+
+/*Main Page (end)*/
+
+.transparentBG {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  margin: 0;
+
+}
+
+#inputPreviewParentDiv,
+#duplicateReviewParentDiv {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+#inputPreviewBtn {
+
+  /*margin-top: 1rem;*/
+  height: 3rem;
+  font-family: Impact;
+  background: aliceblue;
+
+}
+
+#inputPreviewDiv,
+#duplicateReviewDiv,
+#fullDatabaseDiv {
+
+  max-height: 70%;
+  width: 80%;
   overflow-x: auto;
   overflow-y: auto;
-  
+
 }
 
-#previewTable, #inputDupTable, #databaseDupTable, #fullDatabaseTable, #generatedCrewlistTable {
-  
+#inputDupTableDiv,
+#databaseDupTableDiv {
+
+  overflow-x: auto;
+  overflow-y: auto;
+  border: solid 0.1rem white;
+  box-sizing: border-box;
+
+}
+
+#duplicateReviewParentDiv h2,
+#duplicateReviewParentDiv h3,
+#duplicateReviewParentDiv p {
+
+  color: white;
+  font-family: Impact;
+  text-align: center;
+
+}
+
+#duplicateReviewParentDiv p {
+
+  width: 100%;
+  color: green;
+  font-style: italic;
+  border: solid 0.1rem white;
+  box-sizing: border-box;
+
+}
+
+#duplicateReviewParentDiv h3 {
+
+  width: 100%;
+  color: darkred;
+  background: gainsboro;
+
+}
+
+#pushToDatabaseBtn,
+#closeDupReviewBtn {
+
+  height: 3rem;
+  background-color: aliceblue;
+
+}
+
+table {
+
+  width: 100%;
   table-layout: fixed;
-  
+
 }
 
-#previewRow th, #inputDupRow th, #databaseDupRow th, #fullDatabaseRow th, #generatedCrewlistRow th {
+th {
+
+  background: gainsboro;
+  border: 2px white;
+  font-family: Impact;
+  font-size: 1em
+}
+
+td {
+
+  border: 2px white;
+  color: white;
+  font-family: verdana;
+
+}
+
+td,
+th {
+
+  width: 16rem;
+  height: 2rem;
+  text-align: center;
+
+}
+
+#fullDatabaseParentDiv {
+
+  width: 80vw;
+  /*height: 80%;*/
+  box-sizing: border-box;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: verdana;
+
+}
+
+#fullDatabaseParentDiv h1, #fullDatabaseParentDiv h2 {
   
-  background: lightgray;
-  border: 2px solid black;
+  font-family: Impact;
   
 }
 
 #fullDatabaseDiv {
-  
-  display: flex;
-  justify-content: start;
-  flex-direction: column;
-  
+
+  margin: 1rem;
+  border: solid 0.1rem white;
+
 }
 
 #fullDatabaseBtn {
-  
+
   height: 70px;
   width: 200px;
+
+}
+
+#fullDatabaseParentDiv h2 {
+
+  color: ghostwhite;
+  margin: 0;
+
+}
+
+#fullDatabaseParentDiv h1 {
+
+  color: ghostwhite;
+  margin: 0;
+  font-size: 3rem;
+
+}
+
+#downloadDatabaseBtn {
+  
+  height: 2rem;
   
 }
+
+#closeFullDatabaseBtn {
+  
+  background: transparent;
+  color: white;
+  border: none;
+  margin: 1rem;
+  
+}
+
+#crewlistGeneratorParentDiv {
+  
+  width: 80vw;
+  /*height: 80%;*/
+  box-sizing: border-box;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-family: verdana;
+  
+}
+
+#crewlistGeneratorParentDiv label {
+  
+  color: white;
+  font-family: verdana;
+  
+}
+
+#crewlistGeneratorParentDiv h2, #crewlistGeneratorParentDiv h1 {
+  
+  color: white;
+  font-family: Impact;
+  margin: 0;
+  margin-bottom: 2rem
+  
+}
+
+#crewlistGeneratorParentDiv h1 {
+  
+  font-size: 3rem
+  
+}
+
+#crewlistGeneratorDiv {
+  
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+#generatedCrewlistTableDiv {
+  
+  width: 100%;
+  overflow-x: auto;
+  margin: 2rem;
+  
+}
+
+#crewlistGeneratorParentDiv button, #otherFunctionsDiv button{
+  
+  height: 2rem;
+  margin: 1rem;
+  
+}
+
+#otherFunctionsDiv {
+  
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  color: white;
+  font-family: verdana;
+  align-items: center;
+  
+}
+

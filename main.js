@@ -1135,6 +1135,7 @@ let uncategorizedPeople = []
 function organizeEntriesByEmbarkDate() {
 
   let toBeTestedFurtherArray = []
+  organizedByDateArray = []
   uncategorizedPeople = []
 
   //call the first iteration 
@@ -1321,7 +1322,7 @@ function generateCrewlist() {
   })
   
   console.log(organizedByDateArray)
-  organizedByDateArray = []
+  
 
 }
 

@@ -284,7 +284,7 @@ function acquireInputValues() {
   separateBatchData(disembarkationStr, disembarkationArray)
 
   //for returnee identifier
-  binaryDecoder(returneeStr, returneeArray)
+  separateBatchData(returneeStr, returneeArray)
 
 }
 
